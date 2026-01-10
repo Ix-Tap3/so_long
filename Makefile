@@ -7,7 +7,8 @@ SRCS = main.c \
 	   srcs/init.c \
 	   srcs/parsing/parser.c \
 	   srcs/parsing/build_map.c \
-	   srcs/parsing/check_map.c
+	   srcs/parsing/check_map.c \
+	   srcs/parsing/check_path.c
 OBJS = ${SRCS:.c=.o}
 LIB_DIR = libft/
 LIB = $(LIB_DIR)/libft.a

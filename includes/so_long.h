@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:10:08 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 15:03:11 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 17:50:28 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,20 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <errno.h>
+
+typedef struct	s_pos
+{
+	int	x;
+	int	y;
+}		t_pos;
 
 typedef struct	s_map
 {
 	char	**grid;
 	int		width;
 	int		height;
+	int		nb_coins;
+	t_pos	player_pos;
 }			t_map;
 
 typedef struct	s_img
@@ -50,6 +57,8 @@ typedef struct	s_data
 void	parse(t_data *data, char *arg);
 t_map	build_map(char *arg, int fd);
 void	check_map(t_data *data);
+void	check_path(t_data *data);
+int		count_component(char **grid, char cmp);
 
 /* Init functions */
 void	init_map(t_map *map);

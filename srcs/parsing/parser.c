@@ -6,12 +6,30 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:48:04 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 15:03:40 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 17:58:23 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-#include <fcntl.h>
+
+static t_pos	get_player_pos(char **grid)
+{
+	t_pos	pos;
+
+	pos.y = 0;
+	while (grid[pos.y])
+	{
+		pos.x = 0;
+		while (grid[pos.y][pos.x])
+		{
+			if (grid[pos.y][pos.x] == 'P')
+				return (pos);
+			pos.x++;
+		}
+		pos.y++;
+	}
+	return (pos);
+}
 
 void	parse(t_data *data, char *arg)
 {
@@ -25,6 +43,9 @@ void	parse(t_data *data, char *arg)
 	if (fd == - 1)
 		ft_exit_error(NULL);
 	data->map = build_map(arg, fd);
+	data->map.player_pos = get_player_pos(data->map.grid);
+	data->map.nb_coins = count_component(data->map.grid, 'C');
 	close(fd);
 	check_map(data);
+	check_path(data);
 }

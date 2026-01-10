@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 14:50:54 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 14:59:35 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 17:03:02 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	get_map_height(char *arg)
 	return (height);
 }
 
-char	**fill_grid(int fd, int nb_cells, int *cell_len)
+static char	**fill_grid(int fd, int nb_cells, int *cell_len)
 {
 	char	**grid;
 	char	*cell;

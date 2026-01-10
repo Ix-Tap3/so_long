@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:26:44 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 15:05:44 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 17:03:24 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_lines_len(char **grid, int map_width)
 	return (1);
 }
 
-static int	count_component(char **grid, char cmp)
+int	count_component(char **grid, char cmp)
 {
 	int	i;
 	int	j;
