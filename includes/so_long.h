@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:10:08 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 11:59:34 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 15:03:11 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_data
 /* Parsing */
 void	parse(t_data *data, char *arg);
 t_map	build_map(char *arg, int fd);
+void	check_map(t_data *data);
 
 /* Init functions */
 void	init_map(t_map *map);
@@ -61,6 +62,6 @@ void	quit_game(t_data *data);
 int		close_win(t_data *data);
 
 /* Utils functions */
-void	ft_puterror(char *err_msg);
+void	ft_exit_error(char *err_msg);
 
 #endif

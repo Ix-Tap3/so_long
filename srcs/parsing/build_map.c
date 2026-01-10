@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 14:50:54 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 12:02:31 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 14:59:35 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**fill_grid(int fd, int nb_cells, int *cell_len)
 	cell = get_next_line(fd);
 	if (!cell)
 		return (NULL);
-	*cell_len = (int)ft_strlen(cell);
+	*cell_len = (int)ft_strlen_sep(cell, '\n');
 	i = 0;
 	while (cell)
 	{
@@ -71,16 +71,14 @@ t_map	build_map(char *arg, int fd)
 	if (map.height == 0)
 	{
 		close(fd);
-		ft_puterror("Empty map.\n");
-		exit(0);
+		ft_exit_error("Empty map.\n");
 	}
 	map.width = 0;
 	map.grid = fill_grid(fd, map.height, &map.width);
 	if (!map.grid)
 	{
 		close(fd);
-		ft_puterror(NULL);
-		exit(0);
+		ft_exit_error(NULL);
 	}
 	return (map);
 }

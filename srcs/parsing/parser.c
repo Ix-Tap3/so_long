@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:48:04 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 12:00:51 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 15:03:40 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@ void	parse(t_data *data, char *arg)
 	int		fd;
 
 	if (!arg)
-		quit_game(data);
+		ft_exit_error("Invalid map name.\n");
 	if (!ft_strnstr(arg, ".ber", ft_strlen(arg)))
-	{
-		ft_puterror("Invalid map format\n");
-		exit(0);
-	}
+		ft_exit_error("Invalid map format\n");
 	fd = open(arg, O_RDONLY);
 	if (fd == - 1)
-	{
-		ft_puterror(NULL);
-		exit(0);
-	}
+		ft_exit_error(NULL);
 	data->map = build_map(arg, fd);
 	close(fd);
+	check_map(data);
 }

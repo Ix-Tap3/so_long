@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:35:31 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 11:59:47 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/10 15:51:30 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,14 @@ void	display_map(char *map_name, t_map map)
 	}
 }
 
-void	ft_puterror(char *err_msg)
+void	ft_exit_error(char *err_msg)
 {
 	ft_putstr_fd("Error\n", 2);
 	if (err_msg)
-	{
 		ft_putstr_fd(err_msg, 2);
-		return ;
-	}
-	perror(err_msg);
+	else
+		perror(err_msg);
+	exit(0);
 }
 
 int	key_action(int keycode, t_data *data)
@@ -60,16 +59,13 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (ac != 2)
-	{
-		ft_puterror("Invalid number of arguments\n");
-		return (1);
-	}
+		ft_exit_error("Invalid number of arguments\n");
 	parse(&data, av[1]);
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 300, 300, "so_long");
 	display_map(av[1], data.map);
 	mlx_hook(data.win_ptr, 2, 1L, key_action, &data);
-	mlx_hook(data.win_ptr, 17, 1L<<17, close_win, &data);
+	mlx_hook(data.win_ptr, 17, 1L << 17, close_win, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }
