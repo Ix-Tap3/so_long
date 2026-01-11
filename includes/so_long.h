@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:10:08 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 11:57:11 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/11 19:56:04 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ typedef struct	s_data
 	t_img	player;
 	t_img	coin;
 	t_img	exit;
+	t_img	p_on_exit;
+	t_img	open_exit;
 	t_img	wall;
 	t_img	ground;
 	t_map	map;
+	int		moves;
 }				t_data;
  
 /* Parsing */
@@ -68,9 +71,8 @@ int		count_component(char **grid, char cmp);
 void	init_map(t_map *map);
 void	init_imgs(t_data *data);
 void	init_game_assets(t_data *data, char *path);
-
-/* IMGS functions */
-void	put_pixel(t_img *img, int x, int y, int color);
+void	init_open_exit_asset(t_data *d, char *path);
+void	init_p_on_exit_asset(t_data *d, char *path);
 
 /* Exit functions */
 void	quit_game(t_data *data);
@@ -79,8 +81,21 @@ void	destroy_imgs(t_data *data);
 
 /* Utils functions */
 void	ft_exit_error(char *err_msg);
+void	*select_asset(t_data *data, char c);
+t_pos	get_exit_pos(char **map);
+t_pos	get_player_pos(char **map);
 
 /* Draw functions */
-void		draw_map(t_data *data);
+void	draw_map(t_data *data);
+void	draw_player(t_data *data, int dir_x, int dir_y);
+void	draw_open_exit(t_data *data);
+void	draw_exit(t_data *data);
+void	draw_player_on_exit(t_data *data, int x, int y);
+
+/* Game functions */
+void	move_player(t_data *data, int dir_x, int dir_y);
+
+/* TO DEL BEFORE PUSH */
+void	display_map(char *map_name, t_map map);
 
 #endif

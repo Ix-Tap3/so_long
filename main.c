@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:35:31 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 11:58:30 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/11 19:39:27 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,18 @@ void	display_map(char *map_name, t_map map)
 	}
 }
 
-void	ft_exit_error(char *err_msg)
-{
-	ft_putstr_fd("Error\n", 2);
-	if (err_msg)
-		ft_putstr_fd(err_msg, 2);
-	else
-		perror(err_msg);
-	exit(0);
-}
-
 int	key_action(int keycode, t_data *data)
 {
-	static int	move_count = 0;
-
 	if (keycode == XK_Escape)
 		close_win(data);
 	else if (keycode == XK_W || keycode == XK_w)
-		ft_printf("UP\n");
+		move_player(data, 0, -1);
 	else if (keycode == XK_S || keycode == XK_s)
-		ft_printf("DOWN\n");
+		move_player(data, 0, 1);
 	else if (keycode == XK_A || keycode == XK_a)
-		ft_printf("LEFT\n");
+		move_player(data, -1, 0);
 	else if (keycode == XK_D || keycode == XK_d)
-		ft_printf("RIGHT\n");
-	ft_printf("%d moves\n", ++move_count);
+		move_player(data, 1, 0);
 	return (0);
 }
 
@@ -66,7 +53,6 @@ int	main(int ac, char **av)
 							   data.map.height, "so_long");
 	init_game_assets(&data, "./textures/player.xpm");
 	draw_map(&data);
-	display_map(av[1], data.map);
 	mlx_hook(data.win_ptr, 2, 1L, key_action, &data);
 	mlx_hook(data.win_ptr, 17, 1L << 17, close_win, &data);
 	mlx_loop(data.mlx_ptr);

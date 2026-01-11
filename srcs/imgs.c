@@ -6,19 +6,11 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 09:35:09 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 11:19:14 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/11 18:31:57 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-//void	put_pixel(t_img *img, int x, int y, int color)
-//{
-//	char	*dest;
-//
-//	dest = img->addr + (y * img->line + x * (img->bpp / 8));
-//	*(unsigned int *)dest = color;
-//}
 
 static void	init_ground_asset(t_data *d, char *path)
 {
@@ -91,6 +83,8 @@ void	init_game_assets(t_data *d, char *path)
 	d->player = tmp;
 	init_coin_asset(d, "./textures/coin.xpm");
 	init_exit_asset(d, "./textures/exit.xpm");
+	init_open_exit_asset(d, "./textures/open_exit.xpm");
+	init_p_on_exit_asset(d, "./textures/player_on_exit.xpm");
 	init_wall_asset(d, "./textures/wall.xpm");
 	init_ground_asset(d, "./textures/ground.xpm");
 }

@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:06:31 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 11:20:25 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/11 18:45:10 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	destroy_imgs(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->ground.img);
 	if (data->wall.img)
 		mlx_destroy_image(data->mlx_ptr, data->wall.img);
+	if (data->p_on_exit.img)
+		mlx_destroy_image(data->mlx_ptr, data->p_on_exit.img);
+	if (data->open_exit.img)
+		mlx_destroy_image(data->mlx_ptr, data->open_exit.img);
 }
 
 void	quit_game(t_data *data)

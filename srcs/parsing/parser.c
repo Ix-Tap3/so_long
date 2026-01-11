@@ -6,30 +6,11 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:48:04 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 11:38:28 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/11 19:37:51 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-
-static t_pos	get_player_pos(char **grid)
-{
-	t_pos	pos;
-
-	pos.y = 0;
-	while (grid[pos.y])
-	{
-		pos.x = 0;
-		while (grid[pos.y][pos.x])
-		{
-			if (grid[pos.y][pos.x] == 'P')
-				return (pos);
-			pos.x++;
-		}
-		pos.y++;
-	}
-	return (pos);
-}
 
 void	parse(t_data *data, char *arg)
 {
@@ -44,10 +25,12 @@ void	parse(t_data *data, char *arg)
 		ft_exit_error(NULL);
 	data->map = build_map(arg, fd);
 	data->map.player_pos = get_player_pos(data->map.grid);
+	ft_printf("player starting pos : (%d, %d)\n", data->map.player_pos.x, data->map.player_pos.y);
 	data->map.nb_coins = count_component(data->map.grid, 'C');
 	close(fd);
 	check_map(data);
 	check_path(data);
 	data->map.height *= TILE_SIZE;
 	data->map.width *= TILE_SIZE;
+	data->moves = 1;
 }
