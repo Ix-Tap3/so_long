@@ -1,4 +1,6 @@
+so_long
 *.o
+*.a
 *.swp
-assets/*
+textures/*
 mlx_linux
