@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:10:08 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 17:50:28 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/11 11:57:11 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define DOWN 1
 # define RIGHT 2
 # define LEFT 3
+# define TILE_SIZE 32
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 # include <X11/keysym.h>
@@ -40,17 +41,20 @@ typedef struct	s_map
 typedef struct	s_img
 {
 	void	*img;
-	void	*addr;
-	int		bpp;
-	int		line;
-	int		endian;
+	int		width;
+	int		height;
 }			t_img;
 
 typedef struct	s_data
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_map		map;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	player;
+	t_img	coin;
+	t_img	exit;
+	t_img	wall;
+	t_img	ground;
+	t_map	map;
 }				t_data;
  
 /* Parsing */
@@ -62,6 +66,8 @@ int		count_component(char **grid, char cmp);
 
 /* Init functions */
 void	init_map(t_map *map);
+void	init_imgs(t_data *data);
+void	init_game_assets(t_data *data, char *path);
 
 /* IMGS functions */
 void	put_pixel(t_img *img, int x, int y, int color);
@@ -69,8 +75,12 @@ void	put_pixel(t_img *img, int x, int y, int color);
 /* Exit functions */
 void	quit_game(t_data *data);
 int		close_win(t_data *data);
+void	destroy_imgs(t_data *data);
 
 /* Utils functions */
 void	ft_exit_error(char *err_msg);
+
+/* Draw functions */
+void		draw_map(t_data *data);
 
 #endif

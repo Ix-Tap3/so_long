@@ -5,6 +5,7 @@ SRCS = main.c \
 	   srcs/exit.c \
 	   srcs/imgs.c \
 	   srcs/init.c \
+	   srcs/draw_map.c \
 	   srcs/parsing/parser.c \
 	   srcs/parsing/build_map.c \
 	   srcs/parsing/check_map.c \

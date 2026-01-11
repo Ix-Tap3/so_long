@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:48:04 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/10 17:58:23 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/11 11:38:28 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ void	parse(t_data *data, char *arg)
 	close(fd);
 	check_map(data);
 	check_path(data);
+	data->map.height *= TILE_SIZE;
+	data->map.width *= TILE_SIZE;
 }
