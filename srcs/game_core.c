@@ -6,11 +6,29 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:32:23 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 20:08:16 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/13 14:31:03 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+static void	check_win(t_data *data, t_pos p_pos)
+{
+	if (data->map.nb_coins == 0)
+	{
+		ft_freestrar(data->map.grid);
+		quit_game(data);
+	}
+	draw_player_on_exit(data, p_pos.x, p_pos.y);
+}
+
+static void	take_coin(t_data *data, int x, int y)
+{
+	data->map.nb_coins--;
+	data->map.grid[y][x] = '0';
+	if(data->map.nb_coins == 0)
+		draw_open_exit(data);
+}
 
 void	move_player(t_data *data, int dir_x, int dir_y)
 {
@@ -27,21 +45,11 @@ void	move_player(t_data *data, int dir_x, int dir_y)
 		return ;
 	ft_printf("number of moves : %d\n", data->moves++);
 	if (next_cell == 'C')
+		take_coin(data, p_pos.x, p_pos.y);
+	else if (next_cell == 'E')
 	{
-		data->map.nb_coins--;
-		data->map.grid[p_pos.y][p_pos.x] = '0';
-		if (data->map.nb_coins == 0)
-			draw_open_exit(data);
-	}
-	else if (next_cell == 'E' && data->map.nb_coins != 0)
-	{
-		draw_player_on_exit(data, p_pos.x, p_pos.y);
+		check_win(data, p_pos);
 		return ;
-	}
-	else if (next_cell == 'E' && data->map.nb_coins == 0)
-	{
-		ft_freestrar(data->map.grid);
-		quit_game(data);
 	}
 	draw_player(data, p_pos.x, p_pos.y);
 	if (curr_cell == 'E')
