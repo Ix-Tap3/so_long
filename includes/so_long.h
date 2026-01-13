@@ -6,7 +6,7 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:10:08 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 19:56:04 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/13 15:52:12 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ typedef struct	s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		screen_w;
+	int		screen_h;
+	int		viewport;
 	t_img	player;
 	t_img	coin;
 	t_img	exit;

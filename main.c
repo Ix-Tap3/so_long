@@ -6,12 +6,13 @@
 /*   By: pcaplat <pcaplat@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:35:31 by pcaplat           #+#    #+#             */
-/*   Updated: 2026/01/11 19:39:27 by pcaplat          ###   ########.fr       */
+/*   Updated: 2026/01/13 15:51:57 by pcaplat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 #include "libft/libft.h"
+#include "mlx_linux/mlx.h"
 
 void	display_map(char *map_name, t_map map)
 {
@@ -24,6 +25,24 @@ void	display_map(char *map_name, t_map map)
 		ft_printf("%s\n", map.grid[i]);
 		i++;
 	}
+}
+
+void	*set_window(t_data data, char *win_name)
+{
+	int		height;
+	int		width;
+	void	*win_ptr;
+
+	if (data.screen_h < data.map.height)
+		height = data.screen_h;
+	else
+		height = data.map.height;
+	if (data.screen_w < data.map.width)
+		width = data.screen_w;
+	else
+		width = data.map.width;
+	win_ptr = mlx_new_window(data.mlx_ptr, width, height, win_name);
+	return (win_ptr);
 }
 
 int	key_action(int keycode, t_data *data)
@@ -49,9 +68,10 @@ int	main(int ac, char **av)
 		ft_exit_error("Invalid number of arguments\n");
 	parse(&data, av[1]);
 	data.mlx_ptr = mlx_init();
-	data.win_ptr = mlx_new_window(data.mlx_ptr, data.map.width, 
-							   data.map.height, "so_long");
+	mlx_get_screen_size(data.mlx_ptr, &data.screen_w, &data.screen_h);
+	data.win_ptr = set_window(data, "so_long");
 	init_game_assets(&data, "./textures/player.xpm");
+	ft_printf("screen_h : %d, screen_w : %d\n", data.screen_h, data.screen_w);
 	draw_map(&data);
 	mlx_hook(data.win_ptr, 2, 1L, key_action, &data);
 	mlx_hook(data.win_ptr, 17, 1L << 17, close_win, &data);
